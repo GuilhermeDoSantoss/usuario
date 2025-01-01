@@ -36,7 +36,7 @@ public class UsuarioConverter {
     public Endereco paraEndereco(EnderecoDTO enderecoDTO){
         return Endereco.builder()
                 .rua(enderecoDTO.getRua())
-                .numero(enderecoDTO.getNumero())
+                .numero(String.valueOf(enderecoDTO.getNumero()))
                 .cidade(enderecoDTO.getCidade())
                 .complemento(enderecoDTO.getComplemento())
                 .cep(enderecoDTO.getCep())
@@ -77,7 +77,7 @@ public class UsuarioConverter {
     public EnderecoDTO paraEnderecoDTO(Endereco enderecoDTO){
         return EnderecoDTO.builder()
                 .rua(enderecoDTO.getRua())
-                .numero(enderecoDTO.getNumero())
+                .numero(Long.valueOf(enderecoDTO.getNumero()))
                 .cidade(enderecoDTO.getCidade())
                 .complemento(enderecoDTO.getComplemento())
                 .cep(enderecoDTO.getCep())
