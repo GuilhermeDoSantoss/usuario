@@ -30,6 +30,4 @@ public class Endereco {
     @Column(name = "usuario_id")
     private Long usuario_id;
 
-    public static Object biulder() {
-    }
 }
