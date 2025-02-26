@@ -70,7 +70,6 @@ public class UsuarioService {
     public UsuarioDTO atualizaDadosUsuario(String String, UsuarioDTO dto) {
                  //Aqui buscamos o email do usuário através do token (tirando obrigatoriedade do email)
 
-        String email= jwtUtil.extrairEmailToken(token.substring());
 
                 //Criptografia de senha
                 dto.setSenha(dto.getSenha() != null ? passwordEncoder.encode(dto.getSenha()) : null);
