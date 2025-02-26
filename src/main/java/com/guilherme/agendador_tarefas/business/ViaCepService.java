@@ -6,13 +6,20 @@ import com.guilherme.agendador_tarefas.infrastructure.exceptions.IlegalArgumentE
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 @RequiredArgsConstructor
 public class ViaCepService {
 
     private final ViaCepClient client;
 
-    public ViaCepDTO buscarDadosEndereco(String cep){
+    public ViaCepDTO buscarDadosEndereco(String cep) {
+         try {
+            return client.buscaDadosEndereco(processarCep(cep));
+        }  catch (IlegalArgumentException e) {
+        throw new IlegalArgumentException("Erro ", e);
+        }
 
     }
 
@@ -22,7 +29,8 @@ public class ViaCepService {
                 replace("-", "");
 
 
-        if (!cepFormatado.matches("[0-9]") || cepFormatado.length() < 8){
+        if (!cepFormatado.matches("[0-9]")
+                || !Objects.equals(cepFormatado.length(), 8)){
             throw new IlegalArgumentException("O cep contém caracteres inválidos, favor verificar");
         }
 

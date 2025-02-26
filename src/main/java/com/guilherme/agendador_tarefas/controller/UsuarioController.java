@@ -4,6 +4,8 @@ import com.guilherme.agendador_tarefas.UsuarioService;
 import com.guilherme.agendador_tarefas.business.DTO.EnderecoDTO;
 import com.guilherme.agendador_tarefas.business.DTO.TelefoneDTO;
 import com.guilherme.agendador_tarefas.business.DTO.UsuarioDTO;
+import com.guilherme.agendador_tarefas.business.ViaCepService;
+import com.guilherme.agendador_tarefas.infrastructure.clients.ViaCepDTO;
 import com.guilherme.agendador_tarefas.infrastructure.security.JwtUtil;
 import com.guilherme.agendador_tarefas.infrastructure.security.SecurityConfig;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -25,6 +27,7 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
+    private final ViaCepService viaCepService;
 
     @PostMapping
     public ResponseEntity<UsuarioDTO> salvaUsuario(@RequestBody UsuarioDTO usuarioDTO){
@@ -79,5 +82,11 @@ public class UsuarioController {
     public ResponseEntity<TelefoneDTO> cadastraTelefone (@RequestBody TelefoneDTO dto,
                                                          @RequestParam("Authorization") String token){
         return ResponseEntity.ok(usuarioService.cadastraTelefone(token, dto));
+    }
+
+    @GetMapping("/endereco/{cep}")
+
+    public ResponseEntity<ViaCepDTO> buscarDadosCep(@PathVariable("cep") String cep){
+        return ResponseEntity.ok(viaCepService.buscarDadosEndereco(cep));
     }
  }
